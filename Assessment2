@@ -1,3 +1,15 @@
+/* ISE102 Assessment 2 Case Study
+Ashleigh Byrne A00145987
+Victoria Watts
+Jaspa Mahoney
+*/
+
+
+namespace ISE102Assessment2;
+
+public class Bank {
+
+
 // Task 1: Login Module
 
 
@@ -7,6 +19,6 @@
 
 
 
-
+}
 
 // Verify Module
