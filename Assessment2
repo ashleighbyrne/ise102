@@ -17,7 +17,26 @@ password = abc123
 // Task 1: Login Module (Victoria)
 
 
+
+
+
+
+
 //Task 2: Signup Module (Ashleigh)
+
+/* 
+Signup Module Plan:
+Once user selects "option 2: signup" from main menu, another menu opens asking for user details to sign up:
+Username (pulls the username from login module)
+Email
+Age
+Phone
+Password (must match the password from the login module)
+
+Once confirmed, the information the user has entered will show as a list and they will be asked to confirm if it is correct.
+*/
+
+
 public class Signup {
     public void SignupDetails() {
     public string Username() // = name variable defined in Login Module
@@ -83,3 +102,9 @@ public class Signup {
 
 
 // Verify Module (Jaspa)
+
+
+
+
+
+
