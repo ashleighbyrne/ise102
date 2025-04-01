@@ -8,15 +8,15 @@ Jaspa Mahoney
 namespace ISE102Assessment2;
 
 public class Bank {
-
-// Task 1: Login Module (Victoria)
-
 static void Username() {
-public string firstName = "Joe"
- public string surname = "Doe"
-username = (${firstName}"."{surname})
+private string firstName = "Joe"
+private string surname = "Doe"
+username = ($"{firstName}.{surname}")
 password = abc123
 }
+// Task 1: Login Module (Victoria)
+
+
 //Task 2: Signup Module (Ashleigh)
 public class Signup {
     public void SignupDetails() {
@@ -29,12 +29,17 @@ public class Signup {
             username = value;
         }
     }
-    public string Email {
-        Console.Writeline"Email:");
+    private string email {
+        Console.Writeline("Email: ");
         Console.ReadLine();
     }
-    private string age;
+    private string age {
+        Console.WriteLine("Age: ");
+        Console.ReadLine();
+    }
     private string phone;
+        Console.WriteLine("Phone: ");
+        Console.ReadLine();
     public string Password() // = password variable defined in Login Module
     {
                 get {
@@ -46,24 +51,24 @@ public class Signup {
     }
     }
 
-    public void SignupMenu(string[] args) {
+    public void SignupConfirmation() {
+        Console.WriteLine("Please confirm your details below:\n");
+        Console.WriteLine("Username: ");
+        private string username;
+        Console.WriteLine("Email: ");
+        private string email;
+        Console.WriteLine("Age: ");
+        private string age;
+        Console.WriteLine("Phone: ");
+
+    }
+    public void SignupQuestions(string[] args) {
 
         Console.Writeline("Please enter the following information below to complete your signup:");
         Signup userProfile = new Signup(Username); //default constructor
 
-        Console.Writeline($"Username: {userProfile.Username}"); // Brings in user's username from login module
-        Console.ReadLine();
-
-        userProfile.Email();
-
-        Console.Writeline("Age:");
-        Console.ReadLine();
-
-        Console.Writeline("Phone:");
-        Console.ReadLine();
-
-        Console.Writeline("Password:"); // Password must match the one entered by the user in the Login Module
-        Console.ReadLine();
+        userProfile.SignupDetails();
+        userProfile.SignupConfirmation();
     }
     
     
