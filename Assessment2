@@ -46,6 +46,9 @@ public class Signup {
         }
         set {
             username = value;
+
+        Console.WriteLine("Username: )
+        userProfile.username;
         }
     }
     private string email {
@@ -61,15 +64,26 @@ public class Signup {
         Console.ReadLine();
     public string Password() // = password variable defined in Login Module
     {
-                get {
+
+        else {
+
+        get {
             return password;
         }
         set {
             password = value;
+
+        Console.WriteLine("Password: ");
+        passwordConfirm = Console.ReadLine();
+
+        if passwordConfirm !=password {
+        Console.WriteLine("Password incorrect. Please try again.")
+        return SignupDetails();
         }
     }
     }
-
+}
+}
     public void SignupConfirmation() {
         Console.WriteLine("Please confirm your details below:\n");
         Console.WriteLine("Username: ");
@@ -79,6 +93,14 @@ public class Signup {
         Console.WriteLine("Age: ");
         private string age;
         Console.WriteLine("Phone: ");
+        private string phone;
+
+        Console.WriteLine("Is this information correct? (Y/N)")
+        private string confirmation = Console.ReadLine();
+
+        if confirmation = "Y" {
+            break;
+        else return SignupQuestions();
 
     }
     public void SignupQuestions(string[] args) {
