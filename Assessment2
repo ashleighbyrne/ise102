@@ -9,16 +9,72 @@ namespace ISE102Assessment2;
 
 public class Bank {
 
+// Task 1: Login Module (Victoria)
 
-// Task 1: Login Module
+static void Username() {
+public string firstName = "Joe"
+ public string surname = "Doe"
+username = (${firstName}"."{surname})
+password = abc123
+}
+//Task 2: Signup Module (Ashleigh)
+public class Signup {
+    public void SignupDetails() {
+    public string Username() // = name variable defined in Login Module
+    {
+                get {
+            return username;
+        }
+        set {
+            username = value;
+        }
+    }
+    public string Email {
+        Console.Writeline"Email:");
+        Console.ReadLine();
+    }
+    private string age;
+    private string phone;
+    public string Password() // = password variable defined in Login Module
+    {
+                get {
+            return password;
+        }
+        set {
+            password = value;
+        }
+    }
+    }
 
+    public void SignupMenu(string[] args) {
 
+        Console.Writeline("Please enter the following information below to complete your signup:");
+        Signup userProfile = new Signup(Username); //default constructor
 
+        Console.Writeline($"Username: {userProfile.Username}"); // Brings in user's username from login module
+        Console.ReadLine();
 
-//Task 2: Signup Module
+        userProfile.Email();
 
+        Console.Writeline("Age:");
+        Console.ReadLine();
+
+        Console.Writeline("Phone:");
+        Console.ReadLine();
+
+        Console.Writeline("Password:"); // Password must match the one entered by the user in the Login Module
+        Console.ReadLine();
+    }
+    
+    
 
 
 }
 
-// Verify Module
+
+}
+
+
+
+
+// Verify Module (Jaspa)
