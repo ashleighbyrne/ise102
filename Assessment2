@@ -8,19 +8,35 @@ Jaspa Mahoney
 namespace ISE102Assessment2;
 
 public class Bank {
-static void Username() {
+static void Username(){
 private string firstName = "Joe"
 private string surname = "Doe"
 username = ($"{firstName}.{surname}")
 password = abc123
 }
 // Task 1: Login Module (Victoria)
+    
+    //asks for username username
 
+    Console.WriteLine("Username:");
+    string inputu = Console.ReadLine();
+    
+    //asks for password
 
+    Console.WriteLine("Password:");
+    string inputp = Console.ReadLine();
+    
+    //Links to verification system
 
-
-
-
+    if (inputu == username && inputp == password)
+    {
+        Console.WriteLine("Login verified, Welcome."); // Response for correct Login
+    }
+    else
+    {
+        Console.WriteLine("Passowrd or username is incorrect."); // Response for incorrect password or username
+    }
+}
 
 //Task 2: Signup Module (Ashleigh)
 
