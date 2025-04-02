@@ -4,18 +4,17 @@ Victoria Watts
 Jaspa Mahoney
 */
 
+using System;
+using System.Text.RegularExpressions;
 
 namespace ISE102Assessment2;
 
-public class Bank {
-static void Username(){
-private string firstName = "Joe"
-private string surname = "Doe"
-username = ($"{firstName}.{surname}")
-password = abc123
-}
+
+
+
+
+
 // Task 1: Login Module (Victoria)
-    
     //asks for username username
 
     Console.WriteLine("Username:");
@@ -38,111 +37,112 @@ password = abc123
     }
 }
 
+
+
+
+
+
 //Task 2: Signup Module (Ashleigh)
+public class SignupModule
+{
+    // For testing purposes - The user has already created a login account with their full name and password.
+    // User's first name and surname are used to create the user's username. Password was also entered by the user during the login module.
+    private string firstName = "Joe";
+    private string surname = "Doe";
+    public string loginPassword = "abc123";
 
-/* 
-Signup Module Plan:
-Once user selects "option 2: signup" from main menu, another menu opens asking for user details to sign up:
-Username (pulls the username from login module)
-Email
-Age
-Phone
-Password (must match the password from the login module)
-
-Once confirmed, the information the user has entered will show as a list and they will be asked to confirm if it is correct.
-*/
+    //User's unique username is created with the structure "firstName + "." + "surname".
+    //Define the username variable:
+    public string username;
 
 
-public class Signup {
-    public void SignupDetails() {
-    public string Username() // = name variable defined in Login Module
+    public SignupModule()
     {
-                get {
-            return username;
-        }
-        set {
-            username = value;
+        username = $"{firstName}.{surname}";
+    }
+}
 
-        Console.WriteLine("Username: )
-        userProfile.username;
-        }
-    }
-    private string email {
-        Console.Writeline("Email: ");
-        Console.ReadLine();
-    }
-    private string age {
-        Console.WriteLine("Age: ");
-        Console.ReadLine();
-    }
+public class Signup
+{
+    // Define each of the variables for the signup information as private variables, as they are used within the SignupModule class
+    private string username;
+    private string email;
+    private int age;
     private string phone;
-        Console.WriteLine("Phone: ");
-        Console.ReadLine();
-    public string Password() // = password variable defined in Login Module
+    private string password;
+    private string loginPassword;
+
+    public Signup(string existingUsername, string existingPassword)
     {
+        username = existingUsername;
+        loginPassword = existingPassword;
+    }
 
-        else {
-
-        get {
-            return password;
+    public void SignupDetails()
+    {
+        Console.Write("Email: ");
+        email = Console.ReadLine();
+        while (!Regex.IsMatch(email, @"$(.com)"))
+        {
+            Console.Write("Invalid email! Please enter a valid email (e.g., example@example.com): ");
+            email = Console.ReadLine();
         }
-        set {
-            password = value;
 
-        Console.WriteLine("Password: ");
-        passwordConfirm = Console.ReadLine();
+        Console.Write("Age: ");
+        while (!int.TryParse(Console.ReadLine(), out age) || age < 18 || age > 100)
+        {
+            Console.Write("Invalid age! Age must be between 18 and 100. Please enter again: ");
+        }
 
-        if passwordConfirm !=password {
-        Console.WriteLine("Password incorrect. Please try again.")
-        return SignupDetails();
+        Console.Write("Phone: ");
+        phone = Console.ReadLine();
+
+
+        Console.Write("Password: ");
+        password = Console.ReadLine();
+        while (password != loginPassword)
+        {
+            Console.Write("Incorrect password! Please try again: ");
+            password = Console.ReadLine();
         }
     }
+
+    public void SignupConfirmation()
+    {
+        // Program writes out the user's input information to confirm it is all correct
+        Console.WriteLine("\nPlease confirm your details below:\n");
+        Console.WriteLine($"Username: {username}");
+        Console.WriteLine($"Email: {email}");
+        Console.WriteLine($"Age: {age}");
+        Console.WriteLine($"Phone: {phone}");
+
+        Console.Write("\nIs the information correct? (yes/no): ");
+        // Create a confirmation variable and allow the user to input a response. Force the user's response to lower case so it matches "yes"
+        string confirmation = Console.ReadLine().ToLower();
+
+        if (confirmation != "yes")
+        {
+            Console.WriteLine("Restarting signup process...\n");
+            SignupDetails();
+            SignupConfirmation();
+        }
+        else
+        {
+            Console.WriteLine("Signup successful!");
+        }
     }
-}
-}
-    public void SignupConfirmation() {
-        Console.WriteLine("Please confirm your details below:\n");
-        Console.WriteLine("Username: ");
-        private string username;
-        Console.WriteLine("Email: ");
-        private string email;
-        Console.WriteLine("Age: ");
-        private string age;
-        Console.WriteLine("Phone: ");
-        private string phone;
 
-        Console.WriteLine("Is this information correct? (Y/N)")
-        private string confirmation = Console.ReadLine();
+    public static void Main(string[] args)
+    {
+        SignupModule user = new SignupModule();
+        Signup userProfile = new Signup(user.username, user.loginPassword);
 
-        if confirmation = "Y" {
-            break;
-        else return SignupQuestions();
-
-    }
-    public void SignupQuestions(string[] args) {
-
-        Console.Writeline("Please enter the following information below to complete your signup:");
-        Signup userProfile = new Signup(Username); //default constructor
-
+        Console.WriteLine("Please enter the following information to complete your signup:");
         userProfile.SignupDetails();
         userProfile.SignupConfirmation();
     }
-    
-    
-
-
 }
-
-
-}
-
 
 
 
 // Verify Module (Jaspa)
-
-
-
-
-
-
