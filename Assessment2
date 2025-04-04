@@ -10,10 +10,6 @@ using System.Text.RegularExpressions;
 namespace ISE102Assessment2;
 
 
-
-
-
-
 // Task 1: Login Module (Victoria)
     //asks for username username
 
@@ -41,105 +37,108 @@ namespace ISE102Assessment2;
 
 
 
-
 //Task 2: Signup Module (Ashleigh)
-public class SignupModule
+public class SignupModule // Create a class to make a unique username for the user based on their first name and surname entered during the Login Module.
 {
-    // For testing purposes - The user has already created a login account with their full name and password.
-    // User's first name and surname are used to create the user's username. Password was also entered by the user during the login module.
-    private string firstName = "Joe";
-    private string surname = "Doe";
-    public string loginPassword = "abc123";
+    // For testing purposes in Task 2 Signup Module - The user has already created a login account with their full name and password.
+    public string firstName = "Joe"; // First name of the user. Is a public varible so it can be accessed outside of the SignupModule class
+    private string surname = "Doe"; // Surname of the user. Is a private varible so it can only be accessed in the SignupModule class
+    public string loginPassword = "abc123"; //  Password the user entered when creating a login. The password variable is public so it can be accessed in the Signup class
 
-    //User's unique username is created with the structure "firstName + "." + "surname".
-    //Define the username variable:
-    public string username;
+    public string username; // Declare the username variable as public so it can be accessed in the Signup class
 
 
-    public SignupModule()
+    public SignupModule() // Constructor to create a unique username for the user to login with.
     {
-        username = $"{firstName}.{surname}";
+        username = $"{firstName}.{surname}"; // Create a unique username by combining the first name and surname with a "." in between.
     }
 }
 
-public class Signup
+public class Signup // Create a class to collect the signup information from the user
 {
-    // Define each of the variables for the signup information as private variables, as they are used within the SignupModule class
-    private string username;
-    private string email;
-    private int age;
-    private string phone;
-    private string password;
-    private string loginPassword;
+    // Define each of the variables for the signup information as private variables, as they are all used within the SignupModule class
+    //All are private variables so thry can only be accessed in the Signup class:
+    private string username; // Username created in the SignupModule class. 
+    private string email; // Email address of the user.
+    private int age; // Age of the user. Created as an int so it can be validated to be between 18 and 100.
+    private int phone; // Phone number of the user. Must be entered as digits.
+    private string password; // Password the user enters in at the end of their signup. The user will need to enter it in correctly to proceed.
+    private string loginPassword; // Password the user entered when creating a login.
 
-    public Signup(string existingUsername, string existingPassword)
+    public string firstName; // First name of the user. Is a public variable so it can be accessed outside of the Signup class
+    public string phoneAreaCode; // Phone area code of the user. Is a public variable so it can be accessed outside of the Signup class
+
+    public Signup(string existingUsername, string existingPassword) // Constructor to create a new instance of the Signup class with the username and password created in the Login Module
     {
-        username = existingUsername;
-        loginPassword = existingPassword;
+        username = existingUsername; // Assign the username created in the SignupModule class to the username variable in the Signup class
+        loginPassword = existingPassword; // Assign the password entered in the Login Module to the loginPassword variable in the Signup class
     }
 
-    public void SignupDetails()
+    public void SignupDetails() // Method to collect the user's information for the Signup Module.
     {
-        Console.Write("Email: ");
-        email = Console.ReadLine();
-        while (!Regex.IsMatch(email, @"$(.com)"))
+        Console.WriteLine("Email: "); // Prompt the user to enter their email address
+        email = Console.ReadLine().ToLower(); // Assign the user's input to the email variable, and force it to lower case so it is in the correct format.
+        while (!Regex.IsMatch(email, @"\.(com)$")) // Data validation to check if the email address is valid. The email must contain a "." and end with ".com".
         {
-            Console.Write("Invalid email! Please enter a valid email (e.g., example@example.com): ");
-            email = Console.ReadLine();
+            Console.Write("Invalid email! Please enter a valid email (e.g. example@example.com): "); // Prompt the user to enter a valid email address if it does not match the regex pattern
+            email = Console.ReadLine().ToLower(); // Assign the user's input to the email variable after being prompted to enter it in correctly.
         }
 
-        Console.Write("Age: ");
-        while (!int.TryParse(Console.ReadLine(), out age) || age < 18 || age > 100)
+        Console.WriteLine("Age: "); // Prompt the user to enter their age
+        while (!int.TryParse(Console.ReadLine(), out age) || age < 18 || age > 100) // Data validation to check if the age is valid. The age must be between 18 and 100.
         {
-            Console.Write("Invalid age! Age must be between 18 and 100. Please enter again: ");
+            Console.WriteLine("Invalid age! Age must be between 18 and 100. Please enter again: "); // Prompt the user to enter a valid age if it does not match the regex pattern.
         }
 
-        Console.Write("Phone: ");
-        phone = Console.ReadLine();
-
-
-        Console.Write("Password: ");
-        password = Console.ReadLine();
-        while (password != loginPassword)
+        Console.WriteLine("Phone: "); // Prompt the user to enter their phone number
+        while (!int.TryParse(Console.ReadLine(), out phone) || phone > 499999999 || phone < 400000000) // Data validation to check if the phone number is valid. As integers cannot start with 0, the phone number must be between 400000000 and 499999999 to be valid.
         {
-            Console.Write("Incorrect password! Please try again: ");
-            password = Console.ReadLine();
+            Console.WriteLine("Invalid phone number! Please enter a phone number starting with '04':"); // Prompt the user to enter a valid phone number if it does not match the regex pattern.
+        }
+        phoneAreaCode = "+61" + phone; //   Create a phone area code for the user by adding "+61" to the front of the phone number entered by the user.
+
+        Console.WriteLine("Password: "); // Prompt the user to enter their password
+        password = Console.ReadLine(); // Assign the user's input to the password variable
+        while (password != loginPassword) // Data validation to check if the password is valid. The password must match the password entered in the Login Module.
+        {
+            Console.WriteLine("Incorrect password! Please try again: "); // Prompt the user to enter their password again if it does not match the password entered in the Login Module.
+            password = Console.ReadLine(); // Assign the user's input to the password variable after being prompted to enter it in correctly.
         }
     }
 
-    public void SignupConfirmation()
+    public void SignupConfirmation() // Method to confirm the user's information for the Signup Module.
     {
         // Program writes out the user's input information to confirm it is all correct
         Console.WriteLine("\nPlease confirm your details below:\n");
-        Console.WriteLine($"Username: {username}");
-        Console.WriteLine($"Email: {email}");
-        Console.WriteLine($"Age: {age}");
-        Console.WriteLine($"Phone: {phone}");
+        Console.WriteLine($"Username: {username}"); // Display the username created in the SignupModule class
+        Console.WriteLine($"Email: {email}"); // Display the email address entered by the user
+        Console.WriteLine($"Age: {age}"); // Display the age entered by the user
+        Console.WriteLine($"Phone: {phoneAreaCode}"); // Display the phone number entered by the user, starting with the area code
 
-        Console.Write("\nIs the information correct? (yes/no): ");
-        // Create a confirmation variable and allow the user to input a response. Force the user's response to lower case so it matches "yes"
-        string confirmation = Console.ReadLine().ToLower();
 
-        if (confirmation != "yes")
+        Console.Write("\nIs the information correct? (yes/no): "); // Prompt the user to confirm if the information is correct
+        string confirmation = Console.ReadLine().ToLower(); // Assign the user's input to the confirmation variable, and force it to lower case so it is in the correct format.
+
+        if (confirmation != "yes") // If the user enters anything other than "yes", the program will enter this "if" statement.
         {
-            Console.WriteLine("Restarting signup process...\n");
-            SignupDetails();
-            SignupConfirmation();
+            Console.WriteLine("Restarting signup process...\n"); // Inform the user that the signup process is restarting
+            SignupDetails(); // Call the SignupDetails method to collect user information again
+            SignupConfirmation(); // Call the SignupConfirmation method to confirm the information entered by the user again
         }
         else
         {
-            Console.WriteLine("Signup successful!");
+            Console.WriteLine($"Signup successful! Welcome!"); // If the user enters in "yes", the program will enter this "else" statement and inform the user that their signup was successful.
         }
     }
 
-    public static void Main(string[] args)
+    public static void Main(string[] args) // Main method to run the program
     {
-        SignupModule user = new SignupModule();
-        Signup userProfile = new Signup(user.username, user.loginPassword);
+        SignupModule user = new SignupModule(); //  Create an instance of the SignupModule class to access the username and password
+        Signup userProfile = new Signup(user.username, user.loginPassword); // Create an instance of the Signup class to access the signup information from the Login Module
 
-        Console.WriteLine("Please enter the following information to complete your signup:");
-        userProfile.SignupDetails();
-        userProfile.SignupConfirmation();
+        Console.WriteLine($"Hi {user.firstName}! Please enter the following information to complete your signup:"); // Prompt the user to enter their information
+        userProfile.SignupDetails(); // Call the SignupDetails method to collect user information
+        userProfile.SignupConfirmation(); // Call the SignupConfirmation method to confirm the information entered by the user
     }
 }
 
