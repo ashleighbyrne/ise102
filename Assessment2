@@ -34,7 +34,7 @@ namespace ISE102Assessment2;
                     Login();
                     break;
                 case "2":
-                    SignupModule.Signup();
+                    SignupModule.SignupDetails()
                     break;
                 case "3":
                     Console.WriteLine("Shutting down");
