@@ -34,7 +34,7 @@ namespace ISE102Assessment2;
                     Login();
                     break;
                 case "2":
-                    SignupModule.SignupDetails()
+                     SignupModule.SignupDetails();
                     break;
                 case "3":
                     Console.WriteLine("Shutting down");
@@ -103,7 +103,7 @@ public class Signup // Create a class to collect the signup information from the
         loginPassword = existingPassword; // Assign the password entered in the Login Module to the loginPassword variable in the Signup class
     }
 
-    public void SignupDetails() // Method to collect the user's information for the Signup Module.
+     public static void SignupDetails() // Method to collect the user's information for the Signup Module.
     {
         Console.WriteLine("Email: "); // Prompt the user to enter their email address
         email = Console.ReadLine().ToLower(); // Assign the user's input to the email variable, and force it to lower case so it is in the correct format.
