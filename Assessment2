@@ -11,29 +11,59 @@ namespace ISE102Assessment2;
 
 
 // Task 1: Login Module (Victoria)
-public class LoginModule
+
+    public class logsignmenu // Creating class for Menu
 {
-    private static string username = "Yippie";
-    private static string password = "password1234";
+    private static string username = "yipppie"; // Setting static user
+    private static string password = "password1234"; // Setting static password
 
     public static void Main(string[] args)
     {
-        // Login Module
-        Console.WriteLine("Username:");
+        while (true)
+        {
+            Console.WriteLine("Select 1-3: "); // Creating menu
+            Console.WriteLine("1 Login");
+            Console.WriteLine("2 Signup");
+            Console.WriteLine("3 Exit");
+
+            string choice = Console.ReadLine();
+// Creating cases for Login and signup menu
+            switch (choice)
+            {
+                case "1":
+                    Login();
+                    break;
+                case "2":
+                    SignupModule.Signup();
+                    break;
+                case "3":
+                    Console.WriteLine("Shutting down");
+                    return;
+                default:
+                    Console.WriteLine("Choose a option on the menu between 1 to 3.");
+                    break;
+            }
+        }
+    }
+
+    public static void Login()
+    {
+        Console.WriteLine("Username: "); // Asking and for username
         string inputu = Console.ReadLine();
 
-        Console.WriteLine("Password:");
-        string inputp = Console.ReadLine();
+        Console.WriteLine("Password: "); // Asking and for password
+        string inputp = Console.ReadLine(); 
 
-        if (inputu == username && inputp == password)
+        if (inputu == username && inputp == password) // Verifying password and username
         {
             Console.WriteLine("Login verified, Welcome."); // Response for correct Login
         }
         else
         {
             Console.WriteLine("Password or username is incorrect."); // Response for incorrect password or username
-            return; // Exit the program if login fails
         }
+    }
+}
 
 
 //Task 2: Signup Module (Ashleigh)
