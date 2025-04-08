@@ -11,30 +11,29 @@ namespace ISE102Assessment2;
 
 
 // Task 1: Login Module (Victoria)
-    //asks for username username
+public class LoginModule
+{
+    private static string username = "Yippie";
+    private static string password = "password1234";
 
-    Console.WriteLine("Username:");
-    string inputu = Console.ReadLine();
-    
-    //asks for password
-
-    Console.WriteLine("Password:");
-    string inputp = Console.ReadLine();
-    
-    //Links to verification system
-
-    if (inputu == username && inputp == password)
+    public static void Main(string[] args)
     {
-        Console.WriteLine("Login verified, Welcome."); // Response for correct Login
-    }
-    else
-    {
-        Console.WriteLine("Passowrd or username is incorrect."); // Response for incorrect password or username
-    }
-}
+        // Login Module
+        Console.WriteLine("Username:");
+        string inputu = Console.ReadLine();
 
+        Console.WriteLine("Password:");
+        string inputp = Console.ReadLine();
 
-
+        if (inputu == username && inputp == password)
+        {
+            Console.WriteLine("Login verified, Welcome."); // Response for correct Login
+        }
+        else
+        {
+            Console.WriteLine("Password or username is incorrect."); // Response for incorrect password or username
+            return; // Exit the program if login fails
+        }
 
 
 //Task 2: Signup Module (Ashleigh)
