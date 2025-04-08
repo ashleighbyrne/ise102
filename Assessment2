@@ -5,14 +5,15 @@ Jaspa Mahoney
 */
 
 using System;
+using System.Reflection.Metadata;
 using System.Text.RegularExpressions;
 
 namespace ISE102Assessment2;
 
 
-// Task 1: Login Module (Victoria)
 
-    public class logsignmenu // Creating class for Menu
+// Task 1: Login Module (Victoria)
+public class logsignmenu // Creating class for Menu
 {
     private static string username = "yipppie"; // Setting static user
     private static string password = "password1234"; // Setting static password
@@ -27,14 +28,14 @@ namespace ISE102Assessment2;
             Console.WriteLine("3 Exit");
 
             string choice = Console.ReadLine();
-// Creating cases for Login and signup menu
+            // Creating cases for Login and signup menu
             switch (choice)
             {
                 case "1":
                     Login();
                     break;
                 case "2":
-                     SignupModule.SignupDetails();
+                    Signup.SignupDetails();
                     break;
                 case "3":
                     Console.WriteLine("Shutting down");
@@ -52,7 +53,7 @@ namespace ISE102Assessment2;
         string inputu = Console.ReadLine();
 
         Console.WriteLine("Password: "); // Asking and for password
-        string inputp = Console.ReadLine(); 
+        string inputp = Console.ReadLine();
 
         if (inputu == username && inputp == password) // Verifying password and username
         {
@@ -65,73 +66,61 @@ namespace ISE102Assessment2;
     }
 }
 
-
-//Task 2: Signup Module (Ashleigh)
-public class SignupModule // Create a class to make a unique username for the user based on their first name and surname entered during the Login Module.
-{
-    // For testing purposes in Task 2 Signup Module - The user has already created a login account with their full name and password.
-    public string firstName = "Joe"; // First name of the user. Is a public varible so it can be accessed outside of the SignupModule class
-    private string surname = "Doe"; // Surname of the user. Is a private varible so it can only be accessed in the SignupModule class
-    public string loginPassword = "abc123"; //  Password the user entered when creating a login. The password variable is public so it can be accessed in the Signup class
-
-    public string username; // Declare the username variable as public so it can be accessed in the Signup class
-
-
-    public SignupModule() // Constructor to create a unique username for the user to login with.
-    {
-        username = $"{firstName}.{surname}"; // Create a unique username by combining the first name and surname with a "." in between.
-    }
-}
-
+// Task 2: Signup Module (Ashleigh)
 public class Signup // Create a class to collect the signup information from the user
 {
     // Define each of the variables for the signup information as private variables, as they are all used within the SignupModule class
-    //All are private variables so thry can only be accessed in the Signup class:
+    // All are private variables so they can only be accessed in the Signup class:
     private string username; // Username created in the SignupModule class. 
     private string email; // Email address of the user.
     private int age; // Age of the user. Created as an int so it can be validated to be between 18 and 100.
     private int phone; // Phone number of the user. Must be entered as digits.
-    private string password; // Password the user enters in at the end of their signup. The user will need to enter it in correctly to proceed.
-    private string loginPassword; // Password the user entered when creating a login.
+    private string newPassword; // Password the user enters in at the end of their signup. The user will need to enter it in correctly to proceed.
+    private string password; // Password the user entered when creating a login.
 
-    public string firstName; // First name of the user. Is a public variable so it can be accessed outside of the Signup class
     public string phoneAreaCode; // Phone area code of the user. Is a public variable so it can be accessed outside of the Signup class
 
     public Signup(string existingUsername, string existingPassword) // Constructor to create a new instance of the Signup class with the username and password created in the Login Module
     {
         username = existingUsername; // Assign the username created in the SignupModule class to the username variable in the Signup class
-        loginPassword = existingPassword; // Assign the password entered in the Login Module to the loginPassword variable in the Signup class
+        password = existingPassword; // Assign the password entered in the Login Module to the loginPassword variable in the Signup class
     }
 
-     public static void SignupDetails() // Method to collect the user's information for the Signup Module.
+    public static void SignupDetails() // Method to collect the user's information for the Signup Module.
     {
+        Signup user = new Signup("defaultUsername", "defaultPassword"); // Create an instance of Signup to access non-static fields
+
         Console.WriteLine("Email: "); // Prompt the user to enter their email address
-        email = Console.ReadLine().ToLower(); // Assign the user's input to the email variable, and force it to lower case so it is in the correct format.
-        while (!Regex.IsMatch(email, @"\.(com)$")) // Data validation to check if the email address is valid. The email must contain a "." and end with ".com".
+        user.email = Console.ReadLine().ToLower(); // Assign the user's input to the email variable, and force it to lower case so it is in the correct format.
+        while (!Regex.IsMatch(user.email, @"\.(com)$")) // Data validation to check if the email address is valid. The email must contain a "." and end with ".com". Source for Regex method: (IAmTimCorey, 2022) 
         {
             Console.Write("Invalid email! Please enter a valid email (e.g. example@example.com): "); // Prompt the user to enter a valid email address if it does not match the regex pattern
-            email = Console.ReadLine().ToLower(); // Assign the user's input to the email variable after being prompted to enter it in correctly.
+            user.email = Console.ReadLine().ToLower(); // Assign the user's input to the email variable after being prompted to enter it in correctly.
         }
 
         Console.WriteLine("Age: "); // Prompt the user to enter their age
-        while (!int.TryParse(Console.ReadLine(), out age) || age < 18 || age > 100) // Data validation to check if the age is valid. The age must be between 18 and 100.
+        while (!int.TryParse(Console.ReadLine(), out user.age) || user.age < 18 || user.age > 100) // Data validation to check if the age is valid. The age must be between 18 and 100.
         {
             Console.WriteLine("Invalid age! Age must be between 18 and 100. Please enter again: "); // Prompt the user to enter a valid age if it does not match the regex pattern.
         }
 
         Console.WriteLine("Phone: "); // Prompt the user to enter their phone number
-        while (!int.TryParse(Console.ReadLine(), out phone) || phone > 499999999 || phone < 400000000) // Data validation to check if the phone number is valid. As integers cannot start with 0, the phone number must be between 400000000 and 499999999 to be valid.
+
+// Data validation to check if the phone number is valid. Source for TryParse method: (C# TryParse - tutorialsEU - C#, 2023)
+//TryParse converts the user's input string into an integer, and this number is stored in the variable user.phone.
+//As integers cannot start with 0 this is disregarded from the start of the number, and the resulting number must be between 400000000 and 499999999 to be a valid phone number.
+        while (!int.TryParse(Console.ReadLine(), out user.phone) || user.phone > 499999999 || user.phone < 400000000) 
         {
             Console.WriteLine("Invalid phone number! Please enter a phone number starting with '04':"); // Prompt the user to enter a valid phone number if it does not match the regex pattern.
         }
-        phoneAreaCode = "+61" + phone; //   Create a phone area code for the user by adding "+61" to the front of the phone number entered by the user.
+        user.phoneAreaCode = "+61" + user.phone; //   Create a phone area code for the user by adding "+61" to the front of the phone number entered by the user.
 
         Console.WriteLine("Password: "); // Prompt the user to enter their password
-        password = Console.ReadLine(); // Assign the user's input to the password variable
-        while (password != loginPassword) // Data validation to check if the password is valid. The password must match the password entered in the Login Module.
+        user.password = Console.ReadLine(); // Assign the user's input to the password variable
+        while (user.password != user.newPassword) // Data validation to check if the password is valid. The password must match the password entered in the Login Module.
         {
             Console.WriteLine("Incorrect password! Please try again: "); // Prompt the user to enter their password again if it does not match the password entered in the Login Module.
-            password = Console.ReadLine(); // Assign the user's input to the password variable after being prompted to enter it in correctly.
+            user.password = Console.ReadLine(); // Assign the user's input to the password variable after being prompted to enter it in correctly.
         }
     }
 
@@ -159,18 +148,12 @@ public class Signup // Create a class to collect the signup information from the
             Console.WriteLine($"Signup successful! Welcome!"); // If the user enters in "yes", the program will enter this "else" statement and inform the user that their signup was successful.
         }
     }
-
-    public static void Main(string[] args) // Main method to run the program
-    {
-        SignupModule user = new SignupModule(); //  Create an instance of the SignupModule class to access the username and password
-        Signup userProfile = new Signup(user.username, user.loginPassword); // Create an instance of the Signup class to access the signup information from the Login Module
-
-        Console.WriteLine($"Hi {user.firstName}! Please enter the following information to complete your signup:"); // Prompt the user to enter their information
-        userProfile.SignupDetails(); // Call the SignupDetails method to collect user information
-        userProfile.SignupConfirmation(); // Call the SignupConfirmation method to confirm the information entered by the user
-    }
 }
 
 
+*/ References:
 
-// Verify Module (Jaspa)
+IAmTimCorey. (2022). Intro to Regular Expressions - How to use Regex in C#. https://www.youtube.com/watch?v=R5BcHIMZMxc 
+tutorialsEU - C#. 2023. C# TryParse - Converting strings in other data types. https://youtu.be/WV_xXlWl8bQ?si=JonkHpwEc115iSS1
+
+*/
