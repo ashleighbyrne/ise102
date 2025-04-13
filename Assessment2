@@ -61,10 +61,10 @@ namespace ISE102Assessment2
 
         public static void Login()
         {
-            Console.WriteLine("Username: "); // Asking and for username
+            Console.WriteLine("Username: "); // Asking user for username
             string inputu = Console.ReadLine();
 
-            Console.WriteLine("Password: "); // Asking and for password
+            Console.WriteLine("Password: "); // Asking user for password
             string inputp = Console.ReadLine();
 
             if (inputu == username && inputp == password) // Verifying password and username
@@ -79,11 +79,15 @@ namespace ISE102Assessment2
 
 
         // Task 2: Signup Module (Ashleigh)
-        public void Signup() // Create a class to collect the signup information from the user
+        public void Signup() // Method to collect the user's information for the Signup Module using the SignupDetails and SignupConfirmation methods.
         {
-            SignupDetails();
-            SignupConfirmation();
-        } 
+            Console.WriteLine("Please enter your details below to sign up:\n"); // Prompt the user to enter their details for the signup module
+                                                                                // Call the SignupDetails and SignupConfirmation methods to collect and confirm the user's information
+            {
+                SignupDetails();
+                SignupConfirmation();
+            }
+        }
 
 
         public void SignupDetails() // Method to collect the user's information for the Signup Module.
@@ -123,20 +127,21 @@ namespace ISE102Assessment2
 
             do
             {
-                Console.WriteLine("Confirm your new password:");
-                confirmPassword = Console.ReadLine();
+                Console.WriteLine("Confirm your new password:"); // Prompts the user to confirm their new password
+                confirmPassword = Console.ReadLine(); // Assigns the user's input to the confirmPassword variable
 
+                // Data validation to check if the password is valid. The password must match the password entered in the Login Module:
                 if (confirmPassword != newPassword)
                 {
                     Console.WriteLine("Passwords do not match. Please try again.");
                 }
             }
-            while (confirmPassword != newPassword); // Data validation to check if the password is valid. The password must match the password entered in the Login Module.
+            while (confirmPassword != newPassword);
 
             password = newPassword;
 
-        } 
-    
+        }
+
         public void SignupConfirmation() // Method to confirm the user's information for the Signup Module.
         {
             // Program writes out the user's input information to confirm it is all correct
@@ -153,12 +158,12 @@ namespace ISE102Assessment2
             if (confirmation != "yes") // If the user enters anything other than "yes", the program will enter this "if" statement.
             {
                 Console.WriteLine("Restarting signup process...\n"); // Inform the user that the signup process is restarting
-                SignupDetails(); // Call the SignupDetails method to collect user information again
-                SignupConfirmation(); // Call the SignupConfirmation method to confirm the information entered by the user again
+                Signup(); // Call the Signup method again to restart the signup process
             }
             else
             {
                 Console.WriteLine($"Signup successful! Welcome!"); // If the user enters in "yes", the program will enter this "else" statement and inform the user that their signup was successful.
+                return; // Return to the main menu
             }
         }
     }
