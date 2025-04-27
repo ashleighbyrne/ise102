@@ -6,232 +6,166 @@ Victoria Watts A00150225
 using System;
 using System.Text.RegularExpressions;
 
-namespace BankOfNswApp.BankApplication
+namespace BankOfNswApp.BankApplication // Namespace for the Bank of NSW application
 {
-
-
-// Task 1: Login Module (Victoria)
-    public class Bank {
-        private static void MainMenu() {
-            while (true)
-            {
-                Console.WriteLine("Select 1-3: "); // Creating menu
-                Console.WriteLine("1 Login");
-                Console.WriteLine("2 Signup");
-                Console.WriteLine("3 Exit");
-
-                string choice = Console.ReadLine();
-                // Creating cases for Login and signup menu
-                switch (choice)
-                {
-                    case "1":
-                        Login("Joe.Doe", "password123");
-                        break;
-                    case "2":
-                        Signup();
-                        break;
-                    case "3":
-                        Console.WriteLine("Shutting down");
-                        return;
-                    default:
-                        Console.WriteLine("Choose a option on the menu between 1 to 3.");
-                        break;
-                }
-        }
-    }
-    }
-    class Signup {
-    public void Signup()
+    public class Bank // Bank class
     {
-    // Define each of the variables for the signup information as private variables, as they are used within the SignupModule class
-    public string username;
-    public string password;
-    private string email;
-    private int age;
-    private string phone;
+        // Create username and password for an existing account. Static so only one user can login at a time, and private so it's only accessible within this class:
+        private static string username = "Joe.Doe"; // User's existing username for account login   
+        private static string password = "password123"; // User's existing password for account login
+        private static double accountBalance = 0; // User's account balance, current balance is 0
 
-    Signup user = new Signup();
-
-    Console.WriteLine("Please enter your details below:"\n)
-
-    Console.WriteLine("Username: ");
-    string user.username = Console.ReadLine();
-    
-    Console.WriteLine("Password: ");
-    string user.password = Console.ReadLine();
-   
-    Console.Write("Email: ");
-    string user.email = Console.ReadLine();
-    while (!Regex.IsMatch(email, @"$(.com)"))
+        public static void Main(string[] args) // Main method to run the program
         {
-            Console.WriteLine("Invalid email! Please enter a valid email (e.g., example@example.com): ");
+            Console.WriteLine("Welcome to the Bank of NSW!\n"); // Welcome message
+            MainMenu(); // Call the MainMenu method to display the menu options for the user to select from
         }
 
-    Console.WriteLine("Age: ");
-        while (!int.TryParse(Console.ReadLine(), out user.age) || user.age < 18 || user.age > 100)
+        private static void MainMenu() // MainMenu method
         {
-            Console.WriteLine("Invalid age! Age must be between 18 and 100. Please enter again: ");
-        }
-
-        
-    Console.WriteLine("Phone: +61"); // Prompt the user to enter their phone number
-    //string user.phone = Console.ReadLine();
-
-        // Data validation to check if the phone number is valid. Source for TryParse method: (C# TryParse - tutorialsEU - C#, 2023)
-        //TryParse converts the user's input string into an integer, and this number is stored in the variable user.phone.
-        //As integers cannot start with 0 this is disregarded from the start of the number, and the resulting number must be between 400000000 and 499999999 to be a valid phone number.
-        while (!int.TryParse(Console.ReadLine(), out user.phone) || phone > 499999999 || phone < 400000000)
-        {
-            Console.WriteLine("Invalid phone number! Please enter a phone number starting with '04':"); // Prompt the user to enter a valid phone number if it does not match the regex pattern.
-        }
-        int phoneAreaCode = "+61" + user.phone; //   Create a phone area code for the user by adding "+61" to the front of the phone number entered by the user.
-
-        
-    }
-    public void SignupConfirmation()
-    {
-        // Program writes out the user's input information to confirm it is all correct
-        Console.WriteLine("\nPlease confirm your details below:\n");
-        Console.WriteLine($"Username: {username}");
-        Console.WriteLine($"Email: {email}");
-        Console.WriteLine($"Age: {age}");
-        Console.WriteLine($"Phone: {phone}");
-
-        Console.Write("\nIs the information correct? (yes/no): ");
-        // Create a confirmation variable and allow the user to input a response. Force the user's response to lower case so it matches "yes"
-        string confirmation = Console.ReadLine().ToLower();
-
-        if (confirmation != "yes")
-        {
-            Console.WriteLine("Restarting signup process...\n");
-            Signup();
-            SignupConfirmation();
-        }
-        else
-        {
-            Console.WriteLine("Signup successful!");
-            MainMenu2();
-        }
-    }
-    }
-
-class Login {
-    // Create a class to add a new user into the bank application:
-   public string Login(string username, string password) {
-
-
-      public string user.inputu
-      public string user.inputp
-       
-    
-        public string user(username, password){
-        
-        //Verification Details:
-        Console.WriteLine("Welcome to the Bank of NSW! Enter a new username:")
-        user.username = Console.ReadLine();
-        Console.WriteLine("Enter a new password:")
-        user.password = Console.ReadLine();
-        
-
-        // User's login, checked against their details
-        Console.WriteLine("Username:");
-        user.inputu = Console.ReadLine();
-
-        Console.WriteLine("Password:");
-        user.inputp = Console.ReadLine();
-        
-       //Links to verification system:
-       if (user.inputu == user.username && user.inputp == user.password)
-        {
-           Console.WriteLine("Login verified, Welcome."); // Response for correct Login
-        }
-       else
-       {
-        Console.WriteLine("Password or username is incorrect."); // Response for incorrect password or username
-       }
-    }
-   }
-
-    
-}
-
-
-
-public static void MainMenu2() {
-
-            while (true)
+            while (true) // Infinite loop to keep the menu running until the user chooses to exit
             {
-                Console.WriteLine("Select 1-3: "); // Creating menu
-                Console.WriteLine("1 View Account Balance");
-                Console.WriteLine("2 Deposit");
-                Console.WriteLine("3 Withdrawal");
-                Console.WriteLine("4 Exit");
+                Console.WriteLine("\nPlease select an option below:"); // Prompt user to select an option
+                Console.WriteLine("1. Login"); // Option to login to an existing account
+                Console.WriteLine("2. Signup"); // Option to create a new account
+                Console.WriteLine("3. Exit"); // Option to exit the program
 
-                string choice = Console.ReadLine();
-                // Creating cases for Login and signup menu
-                switch (choice)
+                string choice = Console.ReadLine(); // Read user input and store it in the choice variable
+
+                switch (choice) // Switch statement to handle user input
                 {
-                    case "1":
-                        ViewBalance();
-                        break;
-                    case "2":
-                        Deposit();
-                        break;
-                    case "3":
-                        Withdrawal();
-                        break;
-                    case "4":
-                        Console.WriteLine("Shutting down");
-                        return;
-                    default:
-                        Console.WriteLine("Choose a option on the menu between 1 to 3.");
-                        break;
+                    case "1": // If user selects option 1
+                        if (Login()) // The Login method is called, and enters the following if statement if the login is successful
+                        {
+                            MainMenu2(); // If login is successful, call the MainMenu2 method to display account options
+                        }
+                        break; // Break out of the switch statement
+                    case "2": // If user selects option 2
+                        Signup(); // Call the Signup method to create a new account
+                        break; // Break out of the switch statement
+                    case "3": // If user selects option 3
+                        Console.WriteLine("Shutting down..."); // Exit the program
+                        return; // Return out of the MainMenu method
+                    default: // If user selects an invalid option
+                        Console.WriteLine("Choose a valid option between 1 and 3."); // Prompt user to select a valid option
+                        break; //  Break out of the switch statement
                 }
+            }
         }
-    }
- 
- //View Balance Method:
- private double ViewBalance() {
-    Console.WriteLine("Your current account balance is $" + accountBalance)
- }
 
-//Deposit Method:
-private double Deposit() {
-    private double accountBalance = 0;
+        private static bool Login() // Login method
+        {
+            Console.WriteLine("\n--- Login ---"); // Title for the login section
+            Console.Write("Username: "); // Prompt user for username
+            string inputu = Console.ReadLine(); // Read user input for username and assign it to inputu variable
 
-    Console.WriteLine("Current Balance: " + accountBalance + ". How much would you like to deposit?:");
-    depositValue = Console.ReadLine();
-    
-    Console.WriteLine("Deposit value = $" + depositValue + ". Is this correct? (y/n)");
-    depositConfirmation = Console.ReadLine()
-    
+            Console.Write("Password: "); // Prompt user for password
+            string inputp = Console.ReadLine(); // Read user input for password and assign it to inputp variable
 
-if(depositConfirmation == y) {
-    Console.WriteLine("Your new balance is " (accountBalance + depositValue) + ". Thank you.")
-    break;
-}
+            if (inputu == username && inputp == password) // Check if the input username and password match the existing account credentials
+            {
+                Console.WriteLine("\nLogin successful. Welcome, " + username + "!"); // If login is successful, display a welcome message
+                return true; // Return true to indicate successful login, then the program will enter the MainMenu2 method from the "if" statement in the MainMenu method
+            }
+            else // If the input username and password do not match the existing account credentials
+            {
+                Console.WriteLine("\nIncorrect username or password."); //  Display an error message
+                return false; // Return false to indicate unsuccessful login, then the program will return to the MainMenu method
+            }
+        }
 
+        private static void Signup() // Signup method
+        {
+            Console.WriteLine("\n--- Signup ---"); // Title for the signup section
 
-}
+            Console.Write("Create a username: "); // Prompt user for username
+            username = Console.ReadLine(); // Read user input for username and assign it to the static username variable
 
+            Console.Write("Create a password: "); // Prompt user for password
+            password = Console.ReadLine(); // Read user input for password and assign it to the static password variable
 
+            Console.Write("Email: "); // Prompt user for email
+            string email = Console.ReadLine(); // Read user input for email and assign it to the email variable
+            while (!Regex.IsMatch(email, @"\.com$")) // Use Regex for data validation to check if the email ends with ".com" 
+            {
+                Console.Write("Invalid email! Enter a valid email (must end with .com): "); // Prompt user to enter a valid email if the input is invalid
+                email = Console.ReadLine(); // Read user input for email again
+            }
 
-// Withdrawal Module (Victoria)
+            Console.Write("Age: "); // Prompt user for age
+            int age; // Declare age variable as an integer
+            while (!int.TryParse(Console.ReadLine(), out age) || age < 18 || age > 100) // Use int.TryParse to check if the input is a valid integer and within the range of 18 to 100
+            {
+                Console.Write("Invalid age! Age must be between 18 and 100: "); // Prompt user to enter a valid age if the input is invalid
+            }
 
-private double Withdrawal() {
+            Console.Write("Phone number (without +61): "); // Prompt user for phone number
+            int phone; // Declare phone variable as an integer
+            while (!int.TryParse(Console.ReadLine(), out phone) || phone < 400000000 || phone > 499999999) // Use int.TryParse to check if the input is a valid integer and within the range of 400000000 to 499999999
+            {
+                Console.Write("Invalid phone number! Must start with '04': "); // Prompt user to enter a valid phone number if the input is invalid
+            }
 
-}
+            Console.WriteLine("\nSignup successful! You can now login."); // Display a success message
+            accountBalance = 0; // Default account balance for a new user is $0
+        }
 
+        private static void MainMenu2() // MainMenu2 method, called after a successful login
+        {
+            while (true) // Infinite loop to keep the menu running until the user chooses to logout
+            {
+                Console.WriteLine("\nSelect 1-4:"); // Prompt user to select an option
+                Console.WriteLine("1. View Account Balance"); // Option to view account balance
+                Console.WriteLine("2. Deposit"); // Option to deposit money
+                Console.WriteLine("3. Withdrawal"); // Option to withdraw money
+                Console.WriteLine("4. Logout"); // Option to logout
 
+                string choice = Console.ReadLine(); // Read user input and store it in the choice variable
 
+                switch (choice) // Switch statement to handle user's input
+                {
+                    case "1": // If user selects option 1
+                        ViewBalance(); // Call the ViewBalance method to display the account balance
+                        break; // Break out of the switch statement
+                    case "2": // If user selects option 2
+                        Deposit(); // Call the Deposit method to deposit money into the account
+                        break; // Break out of the switch statement
+                    case "3": // If user selects option 3
+                        Withdrawal(); // Call the Withdrawal method to withdraw money from the account
+                        break; // Break out of the switch statement
+                    case "4": // If user selects option 4
+                        Console.WriteLine("Logging out..."); // Display a logout message
+                        return; // Return out of the MainMenu2 method to go back to the MainMenu method
+                    default: // If user selects an invalid option not listed above
+                        Console.WriteLine("Choose a valid option between 1 and 4."); // Prompt user to select a valid option
+                        break; // Break out of the switch statement
+                }
+            }
+        }
 
-//Calling the Main Menu method to start the program:
-    public static void Main(string[] args)
-    {   
-        Console.WriteLine("Welcome, " + user.username "! Please choose from the following options:"\n)
-        MainMenu();
+        private static void ViewBalance() // ViewBalance method
+        {
+            Console.WriteLine($"\nYour current account balance is: ${accountBalance:F2}"); // Display the current account balance formatted to 2 decimal places
+        }
 
+        private static void Deposit() // Deposit method
+        {
+            Console.WriteLine("\nEnter deposit amount: $"); // Prompt user to enter the deposit amount
+            if (double.TryParse(Console.ReadLine(), out double depositAmount) && depositAmount > 0) // Use double.TryParse to check if the input is a valid double and greater than 0
+            {
+                accountBalance += depositAmount; // Add the deposit amount to the account balance variable
+                Console.WriteLine($"Deposit successful! New balance: ${accountBalance:F2}"); // Display a success message with the new account balance formatted to 2 decimal places
+            }
+            else
+            {
+                Console.WriteLine("Invalid amount. Please try again."); // Display an error message if the input is invalid
+            }
+        }
 
+        private static void Withdrawal()
+        {
+
+        }
     }
 }
 
