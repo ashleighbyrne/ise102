@@ -162,9 +162,25 @@ namespace BankOfNswApp.BankApplication // Namespace for the Bank of NSW applicat
             }
         }
 
-        private static void Withdrawal()
+        private static void Withdrawal() // (Victoria)
         {
-
+            Console.WriteLine("Enter your amount for withdrawal: "); 
+            if (double.TryParse(Console.ReadLine(), out double withdrawalAmount) && withdrawalAmount > 0) // Creates a double variable based on users input and holds that value and checks that the value is greater than 0
+            {
+                if (withdrawalAmount <= accountBalance) // Checks that withdrawal amount is within your account balance
+                {
+                    accountBalance -= withdrawalAmount; // Removes the withdrawn amount from your current balance and displays the new balance
+                    Console.WriteLine($"Sucessfully withdrawn, your new balance is: ${accountBalance:F2}");
+                }
+                else
+                {
+                    Console.WriteLine("Withdrawal failed, your balance is to low. Please check your balance and try again"); // Respsonce for enetering an amount higher than your current balance
+                }
+            }
+            else
+            {
+                Console.WriteLine("Your withdrawal input was not valid. Please try again"); // Else statement for if a incorrect input is entered
+            }
         }
     }
 }
